@@ -7,10 +7,7 @@ export default function binarySearch(list: number[], wantedValue: number, start:
 
     let middleValue: number = list[middleIndex]
 
-    // If the wanted value is less than first value or more than last value
-    // the wanted value is not contained in the list. So, the algorithm
-    // will return -1
-    if (wantedValue < list[start] || wantedValue > list[end]) {
+    if (start > end || end < start) {
         return -1
     }
 
@@ -25,7 +22,7 @@ export default function binarySearch(list: number[], wantedValue: number, start:
     // algorithm will call itself in a recursive way, passing, this time, the 
     // fist element to the start param and the middle index like the end param
     if (wantedValue < middleValue) {
-        return binarySearch(list, wantedValue, start, middleIndex);
+        return binarySearch(list, wantedValue, start, middleIndex - 1);
     }
 
     // If the wanted value is more than middle value it is because the wanted 
@@ -33,7 +30,7 @@ export default function binarySearch(list: number[], wantedValue: number, start:
     // algorithm will call itself in a recursive way, passing, this time, the 
     // middle element to the start param and the last element to the end param
     if (wantedValue > middleValue) {
-        return binarySearch(list, wantedValue, middleIndex, end);
+        return binarySearch(list, wantedValue, middleIndex + 1, end);
     }
 
     return -1
